@@ -25,6 +25,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Generate Next.js route types
+        # Creates LayoutProps & friends so tsc works before the full build
+        run: npx next typegen
+
       - name: Typecheck
         run: npx tsc --noEmit
 
