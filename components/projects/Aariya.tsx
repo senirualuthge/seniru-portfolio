@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import Section from "@/components/ui/Section";
 import { aariyaBranches, aariyaStack } from "@/data/projects";
@@ -159,6 +160,17 @@ export default function Aariya() {
                 {tech}
               </span>
             ))}
+          </div>
+
+          <div className="mt-8 flex justify-center">
+            <Link
+              href="/projects/aariya"
+              data-cursor="link"
+              className="group inline-flex items-center gap-2 rounded border border-line px-5 py-3 font-mono text-xs tracking-[0.2em] text-primary transition-colors hover:border-cyan hover:text-cyan"
+            >
+              READ FULL CASE STUDY
+              <span className="transition-transform group-hover:translate-x-1">→</span>
+            </Link>
           </div>
         </div>
       </div>

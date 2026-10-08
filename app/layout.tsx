@@ -4,6 +4,7 @@ import "./globals.css";
 import Nav from "@/components/navigation/Nav";
 import Cursor from "@/components/interactive/Cursor";
 import CommandPalette from "@/components/interactive/CommandPalette";
+import { SITE_URL } from "@/lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,7 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Seniru Aluthge — Undergraduate Developer building Software + AI Systems",
+  metadataBase: new URL(SITE_URL),
+  title: "Seniru Aluthge — Developer & AI Systems Builder",
   description:
     "Portfolio of Seniru Aluthge, undergraduate developer in Sri Lanka. I learn by building real things — an agreement management SaaS platform and Aariya, a multi-surface AI companion with real-time voice interaction.",
   keywords: [
@@ -31,6 +33,14 @@ export const metadata: Metadata = {
     description:
       "Undergraduate developer. I learn by building real things — full-stack platforms and AI systems.",
     type: "website",
+    url: SITE_URL,
+    siteName: "Seniru Aluthge",
+  },
+  twitter: {
+    card: "summary",
+    title: "Seniru Aluthge — Developer & AI Systems Builder",
+    description:
+      "Undergraduate developer exploring full-stack development, AI systems, and real-world software projects.",
   },
 };
 

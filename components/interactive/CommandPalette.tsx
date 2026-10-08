@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { useCommandPalette } from "@/hooks/useCommandPalette";
 import { cn } from "@/lib/utils";
 
@@ -18,34 +19,56 @@ function scrollTo(id: string) {
 function PaletteBody({ onClose }: { onClose: () => void }) {
   const [query, setQuery] = useState("");
   const [active, setActive] = useState(0);
+  const pathname = usePathname();
+  const router = useRouter();
 
-  const commands: Command[] = useMemo(
-    () => [
-      { id: "home", label: "Home", hint: "Top of page", run: () => scrollTo("home") },
-      { id: "about", label: "About", hint: "Who I am", run: () => scrollTo("about") },
-      { id: "build", label: "What I Build", hint: "Direction", run: () => scrollTo("build") },
+  const commands: Command[] = useMemo(() => {
+    /** Scroll on the homepage; navigate home first when on a subpage. */
+    const goToSection = (id: string) => {
+      if (pathname !== "/") {
+        router.push(`/#${id}`);
+      } else {
+        scrollTo(id);
+      }
+    };
+
+    return [
+      { id: "home", label: "Home", hint: "Top of page", run: () => goToSection("home") },
+      { id: "about", label: "About", hint: "Who I am", run: () => goToSection("about") },
+      { id: "build", label: "What I Build", hint: "Direction", run: () => goToSection("build") },
       {
         id: "agreement",
         label: "Agreement Platform",
         hint: "Featured project 01",
-        run: () => scrollTo("agreement-platform"),
+        run: () => goToSection("agreement-platform"),
       },
-      { id: "aariya", label: "Aariya", hint: "Featured project 02", run: () => scrollTo("aariya") },
-      { id: "lab", label: "System Lab", hint: "Interactive demos", run: () => scrollTo("lab") },
-      { id: "skills", label: "Tech Stack", hint: "Skills", run: () => scrollTo("skills") },
-      { id: "journey", label: "Journey", hint: "Building timeline", run: () => scrollTo("journey") },
-      { id: "github", label: "GitHub", hint: "Live activity", run: () => scrollTo("github") },
-      { id: "building", label: "Currently Building", hint: "Status", run: () => scrollTo("building") },
-      { id: "contact", label: "Contact", hint: "Let's build something", run: () => scrollTo("contact") },
+      { id: "aariya", label: "Aariya", hint: "Featured project 02", run: () => goToSection("aariya") },
+      { id: "lab", label: "System Lab", hint: "Interactive demos", run: () => goToSection("lab") },
+      { id: "skills", label: "Tech Stack", hint: "Skills", run: () => goToSection("skills") },
+      { id: "journey", label: "Journey", hint: "Building timeline", run: () => goToSection("journey") },
+      { id: "github", label: "GitHub", hint: "Live activity", run: () => goToSection("github") },
+      { id: "building", label: "Currently Building", hint: "Status", run: () => goToSection("building") },
+      { id: "contact", label: "Contact", hint: "Let's build something", run: () => goToSection("contact") },
+      {
+        id: "case-agreement",
+        label: "Case Study: Agreement Platform",
+        hint: "Lifecycle · architecture · decisions",
+        run: () => router.push("/projects/agreement-platform"),
+      },
+      {
+        id: "case-aariya",
+        label: "Case Study: Aariya",
+        hint: "AI core · voice · real-time",
+        run: () => router.push("/projects/aariya"),
+      },
       {
         id: "ghlink",
         label: "Open GitHub profile",
         hint: "github.com/senirualuthge",
         run: () => window.open("https://github.com/senirualuthge", "_blank"),
       },
-    ],
-    []
-  );
+    ];
+  }, [pathname, router]);
 
   const filtered = commands.filter(
     (c) =>

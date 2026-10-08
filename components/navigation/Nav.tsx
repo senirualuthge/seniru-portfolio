@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { openCommandPalette } from "@/hooks/useCommandPalette";
 import { cn } from "@/lib/utils";
 
@@ -21,6 +22,8 @@ const LINKS = [
 export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -39,6 +42,11 @@ export default function Nav() {
 
   const go = (id: string) => {
     setMenuOpen(false);
+    if (pathname !== "/") {
+      // On a subpage, navigate home first, then scroll to the section
+      router.push(`/#${id}`);
+      return;
+    }
     setTimeout(() => {
       document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     }, 150);
