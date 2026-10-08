@@ -318,21 +318,21 @@ export default function AgreementPlatform() {
               )}
             </motion.div>
           </AnimatePresence>
-        </div>
-      </div>
 
-      <div className="mt-8 flex flex-col items-center gap-3">
-        <p className="font-mono text-[11px] text-secondary/60">
-          Architecture data is live — switch tabs above to explore the system.
-        </p>
-        <Link
-          href="/projects/agreement-platform"
-          data-cursor="link"
-          className="group inline-flex items-center gap-2 rounded border border-line px-5 py-3 font-mono text-xs tracking-[0.2em] text-primary transition-colors hover:border-accent hover:text-accent"
-        >
-          READ FULL CASE STUDY
-          <span className="transition-transform group-hover:translate-x-1">→</span>
-        </Link>
+          <div className="mt-8 flex flex-col items-center gap-3">
+            <p className="font-mono text-[11px] text-secondary/60">
+              Architecture data is live — switch tabs above to explore the system.
+            </p>
+            <Link
+              href="/projects/agreement-platform"
+              data-cursor="link"
+              className="group inline-flex items-center gap-2 rounded border border-line px-5 py-3 font-mono text-xs tracking-[0.2em] text-primary transition-colors hover:border-accent hover:text-accent"
+            >
+              READ FULL CASE STUDY
+              <span className="transition-transform group-hover:translate-x-1">→</span>
+            </Link>
+          </div>
+        </div>
       </div>
     </Section>
   );
