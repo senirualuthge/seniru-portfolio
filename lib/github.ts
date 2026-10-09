@@ -35,7 +35,10 @@ export async function fetchRepos(username: string, limit = 6): Promise<GhRepo[]>
   if (!res.ok) throw new Error(`GitHub repos request failed: ${res.status}`);
   const repos: GhRepo[] = await res.json();
   return repos
-    .filter((r) => !r.fork)
+    // Skip forks and the profile-README meta repo (<user>/<user>): any push to
+    // that repo bumps its updated_at, which would otherwise reshuffle the
+    // SELECTED REPOSITORIES list on every profile README edit.
+    .filter((r) => !r.fork && r.name !== username)
     .sort((a, b) => +new Date(b.updated_at) - +new Date(a.updated_at))
     .slice(0, limit);
 }
