@@ -3,21 +3,55 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
+const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
+
 export default function ContactForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [errorMsg, setErrorMsg] = useState("");
+  const [form, setForm] = useState({ name: "", email: "", message: "", botcheck: false });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!form.name || !form.email || !form.message) {
+      setErrorMsg("Please fill in all fields.");
+      setStatus("error");
+      return;
+    }
+
+    if (!WEB3FORMS_KEY) {
+      setErrorMsg("Contact form isn't configured yet. Please email seniru2004@gmail.com.");
+      setStatus("error");
+      return;
+    }
+
     setStatus("sending");
-    setTimeout(() => {
-      if (form.name && form.email && form.message) {
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          name: form.name,
+          email: form.email,
+          message: form.message,
+          subject: `Portfolio contact from ${form.name}`,
+          from_name: "seniru-portfolio",
+          botcheck: form.botcheck,
+        }),
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
         setStatus("success");
-        setForm({ name: "", email: "", message: "" });
+        setForm({ name: "", email: "", message: "", botcheck: false });
       } else {
+        setErrorMsg("Something went wrong. Please email seniru2004@gmail.com.");
         setStatus("error");
       }
-    }, 800);
+    } catch {
+      setErrorMsg("Something went wrong. Please email seniru2004@gmail.com.");
+      setStatus("error");
+    }
   };
 
   return (
@@ -29,6 +63,16 @@ export default function ContactForm() {
       transition={{ delay: 0.4 }}
       className="mt-10 grid gap-4 rounded-xl border border-line bg-panel/60 p-6 sm:max-w-lg"
     >
+      <input
+        type="checkbox"
+        name="botcheck"
+        checked={form.botcheck}
+        onChange={(e) => setForm((f) => ({ ...f, botcheck: e.target.checked }))}
+        className="hidden"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden
+      />
       <div>
         <label className="mb-1.5 block font-mono text-[10px] tracking-widest text-secondary">NAME</label>
         <input
@@ -67,7 +111,7 @@ export default function ContactForm() {
         {status === "sending" ? "SENDING..." : status === "success" ? "MESSAGE RECEIVED ✓" : "SEND MESSAGE"}
       </button>
       {status === "error" && (
-        <p className="font-mono text-[10px] text-accent">Please fill in all fields.</p>
+        <p className="font-mono text-[10px] text-accent">{errorMsg}</p>
       )}
       {status === "success" && (
         <p className="font-mono text-[10px] text-success">Thanks for reaching out.</p>
@@ -75,3 +119,4 @@ export default function ContactForm() {
     </motion.form>
   );
 }
+
