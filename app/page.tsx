@@ -9,7 +9,6 @@ import Aariya from "@/components/projects/Aariya";
 import SystemLab from "@/components/lab/SystemLab";
 import Skills from "@/components/skills/Skills";
 import Journey from "@/components/timeline/Journey";
-import CurrentlyBuilding from "@/components/building/CurrentlyBuilding";
 import BuildLogSection from "@/components/buildlog/BuildLogSection";
 import SystemStatus from "@/components/systemstatus/SystemStatus";
 import Contact from "@/components/contact/Contact";
@@ -28,7 +27,6 @@ export default function Home() {
       <SystemLab />
       <Skills />
       <Journey />
-      <CurrentlyBuilding />
       <BuildLogSection />
       <SystemStatus />
       <Contact />
