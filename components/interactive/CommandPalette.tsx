@@ -67,6 +67,7 @@ function PaletteBody({ onClose }: { onClose: () => void }) {
       { id: "resume", label: "Resume", hint: "View resume", run: () => router.push("/resume") },
       { id: "buildlog", label: "Build Log", hint: "Build in public", run: () => router.push("/build-log") },
       { id: "experiments", label: "Experiments", hint: "Playground", run: () => router.push("/experiments") },
+      { id: "decisions", label: "Decisions", hint: "Technical decisions", run: () => router.push("/decisions") },
       {
         id: "ghlink",
         label: "Open GitHub profile",

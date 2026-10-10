@@ -4,6 +4,9 @@ import "./globals.css";
 import Nav from "@/components/navigation/Nav";
 import Cursor from "@/components/interactive/Cursor";
 import CommandPalette from "@/components/interactive/CommandPalette";
+import DevConsole from "@/components/console/DevConsole";
+import AccessibilityPrefs from "@/components/accessibility/AccessibilityPrefs";
+import Welcome from "@/components/welcome/Welcome";
 import { SITE_URL } from "@/lib/site";
 
 const geistSans = Geist({
@@ -55,6 +58,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {children}
         <CommandPalette />
         <Cursor />
+        <DevConsole />
+        <AccessibilityPrefs />
+        <Welcome />
       </body>
     </html>
   );

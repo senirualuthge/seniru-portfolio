@@ -146,3 +146,34 @@ input[type="range"]::-moz-range-thumb {
     animation: none;
   }
 }
+
+/* Accessibility preferences */
+html.reduce-motion *,
+html.reduce-motion *::before,
+html.reduce-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+html.high-contrast {
+  --color-ink: #000000;
+  --color-panel: #050505;
+  --color-primary: #ffffff;
+  --color-secondary: #e5e5e5;
+  --color-line: #ffffff40;
+  --color-accent: #a78bfa;
+}
+
+html.large-text body {
+  font-size: 18px;
+}
+
+html.large-text .text-sm {
+  font-size: 1rem;
+}
+
+html.large-text .text-xs {
+  font-size: 0.875rem;
+}
