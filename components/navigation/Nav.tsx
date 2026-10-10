@@ -9,6 +9,7 @@ const LINKS = [
   { id: "home", label: "HOME" },
   { id: "about", label: "ABOUT" },
   { id: "build", label: "WHAT I BUILD" },
+  { id: "how-i-think", label: "HOW I THINK" },
   { id: "agreement-platform", label: "AGREEMENT PLATFORM" },
   { id: "aariya", label: "AARIYA" },
   { id: "lab", label: "SYSTEM LAB" },
@@ -16,6 +17,8 @@ const LINKS = [
   { id: "journey", label: "JOURNEY" },
   { id: "github", label: "GITHUB" },
   { id: "building", label: "CURRENTLY BUILDING" },
+  { id: "build-log", label: "BUILD LOG" },
+  { id: "system-status", label: "SYSTEM STATUS" },
   { id: "contact", label: "CONTACT" },
 ];
 

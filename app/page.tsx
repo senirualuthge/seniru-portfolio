@@ -1,6 +1,7 @@
 import Hero from "@/components/hero/Hero";
 import About from "@/components/about/About";
 import WhatIBuild from "@/components/build/WhatIBuild";
+import HowIThink from "@/components/howithink/HowIThink";
 import AgreementPlatform from "@/components/projects/AgreementPlatform";
 import Aariya from "@/components/projects/Aariya";
 import SystemLab from "@/components/lab/SystemLab";
@@ -8,6 +9,8 @@ import Skills from "@/components/skills/Skills";
 import Journey from "@/components/timeline/Journey";
 import GitHubSection from "@/components/github/GitHubSection";
 import CurrentlyBuilding from "@/components/building/CurrentlyBuilding";
+import BuildLogSection from "@/components/buildlog/BuildLogSection";
+import SystemStatus from "@/components/systemstatus/SystemStatus";
 import Contact from "@/components/contact/Contact";
 
 export default function Home() {
@@ -16,6 +19,7 @@ export default function Home() {
       <Hero />
       <About />
       <WhatIBuild />
+      <HowIThink />
       <AgreementPlatform />
       <Aariya />
       <SystemLab />
@@ -23,6 +27,8 @@ export default function Home() {
       <Journey />
       <GitHubSection />
       <CurrentlyBuilding />
+      <BuildLogSection />
+      <SystemStatus />
       <Contact />
     </main>
   );

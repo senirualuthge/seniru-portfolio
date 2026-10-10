@@ -36,6 +36,7 @@ function PaletteBody({ onClose }: { onClose: () => void }) {
       { id: "home", label: "Home", hint: "Top of page", run: () => goToSection("home") },
       { id: "about", label: "About", hint: "Who I am", run: () => goToSection("about") },
       { id: "build", label: "What I Build", hint: "Direction", run: () => goToSection("build") },
+      { id: "how-i-think", label: "How I Think", hint: "Engineering thinking", run: () => goToSection("how-i-think") },
       {
         id: "agreement",
         label: "Agreement Platform",
@@ -48,6 +49,8 @@ function PaletteBody({ onClose }: { onClose: () => void }) {
       { id: "journey", label: "Journey", hint: "Building timeline", run: () => goToSection("journey") },
       { id: "github", label: "GitHub", hint: "Live activity", run: () => goToSection("github") },
       { id: "building", label: "Currently Building", hint: "Status", run: () => goToSection("building") },
+      { id: "build-log", label: "Build Log", hint: "Build in public", run: () => goToSection("build-log") },
+      { id: "system-status", label: "System Status", hint: "Live status", run: () => goToSection("system-status") },
       { id: "contact", label: "Contact", hint: "Let's build something", run: () => goToSection("contact") },
       {
         id: "case-agreement",
@@ -61,6 +64,9 @@ function PaletteBody({ onClose }: { onClose: () => void }) {
         hint: "AI core · voice · real-time",
         run: () => router.push("/projects/aariya"),
       },
+      { id: "resume", label: "Resume", hint: "View resume", run: () => router.push("/resume") },
+      { id: "buildlog", label: "Build Log", hint: "Build in public", run: () => router.push("/build-log") },
+      { id: "experiments", label: "Experiments", hint: "Playground", run: () => router.push("/experiments") },
       {
         id: "ghlink",
         label: "Open GitHub profile",

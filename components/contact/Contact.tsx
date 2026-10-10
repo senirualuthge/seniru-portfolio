@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { openCommandPalette } from "@/hooks/useCommandPalette";
+import ContactForm from "./ContactForm";
 
 const LINKS = [
   {
@@ -56,6 +57,8 @@ export default function Contact() {
           Interested in software, AI systems or interesting ideas? I&apos;m an
           undergraduate actively looking for internships and junior roles.
         </p>
+
+        <ContactForm />
 
         <div className="mt-10 grid gap-3 sm:grid-cols-3">
           {LINKS.map((link, i) => (
