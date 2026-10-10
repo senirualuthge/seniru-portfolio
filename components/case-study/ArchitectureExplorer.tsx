@@ -59,9 +59,9 @@ export default function ArchitectureExplorer({
         SYSTEM ARCHITECTURE — {hint.toUpperCase()}
       </p>
 
-      <div className="overflow-x-auto">
+      <div className="-mx-5 overflow-x-auto px-5 sm:mx-0 sm:px-0">
         <div
-          className="relative mx-auto min-w-[560px]"
+          className="relative mx-auto w-full min-w-[520px] sm:min-w-[560px]"
           style={{ height: Math.max(rows * 110, 300) }}
         >
           {/* Connectors */}

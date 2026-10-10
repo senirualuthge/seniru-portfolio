@@ -172,7 +172,7 @@ export default function AgreementPlatform() {
             {/* Lifecycle */}
             <div className="flex flex-col items-start gap-1 lg:items-center lg:flex-row lg:gap-2">
               {agreementLifecycle.map((stage, i) => (
-                <div key={stage} className="flex items-center gap-1 lg:gap-2">
+                <div key={stage} className="flex items-start gap-1 lg:items-center lg:gap-2">
                   <span
                     data-cursor="link"
                     className="rounded border border-line bg-ink px-2.5 py-1.5 font-mono text-[10px] tracking-widest text-secondary transition-colors hover:border-accent hover:text-primary"
@@ -180,7 +180,7 @@ export default function AgreementPlatform() {
                     {stage}
                   </span>
                   {i < agreementLifecycle.length - 1 && (
-                    <span className="font-mono text-[10px] text-accent lg:rotate-0 rotate-90">
+                    <span className="font-mono text-[10px] text-accent rotate-90 lg:rotate-0">
                       ↓
                     </span>
                   )}

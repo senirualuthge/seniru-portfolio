@@ -17,6 +17,8 @@ export default function Hero() {
 
   /** Nodes drift away from the cursor — the system "reacts" to you. */
   const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const fine = window.matchMedia("(hover: hover) and (pointer: fine)");
+    if (!fine.matches) return;
     const rect = vizRef.current?.getBoundingClientRect();
     if (!rect) return;
     const mx = e.clientX - rect.left;
@@ -37,7 +39,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-screen items-center overflow-hidden scroll-mt-0 pt-24"
+      className="relative flex min-h-screen items-center overflow-hidden scroll-mt-0 pt-20 sm:pt-24"
     >
       <div className="grid-bg absolute inset-0 opacity-40" aria-hidden />
       <div

@@ -12,8 +12,8 @@ export default function Journey() {
         building and learning. Scroll horizontally →
       </p>
 
-      <div className="no-scrollbar -mx-5 overflow-x-auto px-5 pb-4">
-        <div className="flex min-w-max gap-6">
+      <div className="no-scrollbar -mx-5 overflow-x-auto scroll-smooth px-5 pb-4">
+        <div className="flex min-w-max gap-5 sm:gap-6">
           {journey.map((entry, i) => (
             <motion.article
               key={entry.year}

@@ -311,7 +311,7 @@ export default function CaseStudyView({ study }: { study: CaseStudy }) {
           aria-label="Case study sections"
           className="mb-8 lg:mb-0 lg:self-start"
         >
-          <div className="sticky top-24 flex gap-1 overflow-x-auto no-scrollbar lg:flex-col lg:overflow-visible">
+          <div className="sticky top-24 -mx-5 flex gap-1 overflow-x-auto px-5 no-scrollbar sm:mx-0 sm:px-0 lg:flex-col lg:overflow-visible">
             <p className="hidden pb-3 font-mono text-[10px] tracking-[0.25em] text-secondary/70 lg:block">
               CONTENTS
             </p>

@@ -74,14 +74,14 @@ export default function Aariya() {
                 />
               </svg>
 
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-3 sm:gap-3">
                 {aariyaBranches.map((b) => (
                   <button
                     key={b.id}
                     onClick={() => setActive(b.id)}
                     data-cursor="link"
                     className={cn(
-                      "rounded border px-2 py-3 text-center transition-all",
+                      "rounded border px-2 py-2.5 text-center transition-all sm:py-3",
                       active === b.id
                         ? "border-cyan bg-cyan/10 shadow-lg shadow-cyan/10"
                         : "border-line hover:border-secondary"
@@ -95,7 +95,7 @@ export default function Aariya() {
                     >
                       {b.label}
                     </p>
-                    <p className="mt-1 hidden text-[10px] leading-tight text-secondary sm:block">
+                    <p className="mt-0.5 text-[10px] leading-tight text-secondary sm:mt-1">
                       {b.sub}
                     </p>
                   </button>

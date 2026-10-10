@@ -35,7 +35,7 @@ export default function Cursor() {
         setMode((target.dataset.cursor as CursorMode) || "link");
       } else {
         const interactive = (e.target as HTMLElement | null)?.closest?.(
-          "a, button, input, label, [role='button']"
+          "a, button, input, label, [role='button'], [tabindex]"
         );
         setMode(interactive ? "link" : "default");
       }

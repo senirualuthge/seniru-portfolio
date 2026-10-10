@@ -58,6 +58,7 @@ html.custom-cursor a,
 html.custom-cursor button,
 html.custom-cursor input,
 html.custom-cursor [role="button"],
+html.custom-cursor [data-cursor],
 html.custom-cursor label,
 html.custom-cursor summary {
   cursor: none;
@@ -68,7 +69,13 @@ html.custom-cursor summary {
   background-image:
     linear-gradient(to right, rgba(39, 39, 42, 0.35) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(39, 39, 42, 0.35) 1px, transparent 1px);
-  background-size: 64px 64px;
+  background-size: 40px 40px;
+}
+
+@media (min-width: 640px) {
+  .grid-bg {
+    background-size: 64px 64px;
+  }
 }
 
 .no-scrollbar::-webkit-scrollbar {
