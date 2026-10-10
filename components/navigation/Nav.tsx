@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 
-const LINKS = [
+const LINKS: { id: string; label: string; href?: string }[] = [
   { id: "home", label: "HOME" },
   { id: "about", label: "ABOUT" },
   { id: "build", label: "WHAT I BUILD" },
@@ -14,13 +14,11 @@ const LINKS = [
   { id: "lab", label: "SYSTEM LAB" },
   { id: "skills", label: "SKILLS" },
   { id: "journey", label: "JOURNEY" },
-  { id: "github", label: "GITHUB" },
-  { id: "building", label: "CURRENTLY BUILDING" },
   { id: "build-log", label: "BUILD LOG" },
   { id: "how-i-think", label: "HOW I THINK" },
   { id: "problems-solutions", label: "PROBLEMS → SOLUTIONS" },
   { id: "failures-lessons", label: "FAILURES → LESSONS" },
-  { id: "decisions", label: "DECISIONS" },
+  { id: "decisions", label: "DECISIONS", href: "/decisions" },
   { id: "system-status", label: "SYSTEM STATUS" },
   { id: "contact", label: "CONTACT" },
 ];
@@ -40,11 +38,13 @@ export default function Nav() {
 
   const isHome = pathname === "/";
 
-  const handleClick = (id: string) => {
-    if (!isHome) {
-      router.push(`/#${id}`);
+  const handleClick = (link: { id: string; href?: string }) => {
+    if (link.href) {
+      router.push(link.href);
+    } else if (!isHome) {
+      router.push(`/#${link.id}`);
     } else {
-      const el = document.getElementById(id);
+      const el = document.getElementById(link.id);
       if (el) {
         el.scrollIntoView({ behavior: "smooth", block: "start" });
       }
@@ -86,7 +86,7 @@ export default function Nav() {
               <li key={link.id}>
                 <button
                   className="group flex w-full items-baseline justify-between border-b border-line pb-1 text-left"
-                  onClick={() => handleClick(link.id)}
+                  onClick={() => handleClick(link)}
                   data-cursor="link"
                 >
                   <span className="font-mono text-xs tracking-[0.25em] text-secondary transition-colors group-hover:text-primary">

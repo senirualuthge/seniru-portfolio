@@ -70,8 +70,6 @@ export default function CommandPalette() {
       { id: "lab", label: "Go to System Lab", hint: "Playground", run: () => goTo("lab") },
       { id: "skills", label: "Go to Skills", hint: "Technologies", run: () => goTo("skills") },
       { id: "journey", label: "Go to Journey", hint: "Timeline", run: () => goTo("journey") },
-      { id: "github", label: "Go to GitHub", hint: "Repositories", run: () => goTo("github") },
-      { id: "building", label: "Go to Currently Building", hint: "In progress", run: () => goTo("building") },
       { id: "build-log", label: "Go to Build Log", hint: "Changelog", run: () => goTo("build-log") },
       { id: "system-status", label: "Go to System Status", hint: "Live status", run: () => goTo("system-status") },
       { id: "contact", label: "Go to Contact", hint: "Get in touch", run: () => goTo("contact") },
