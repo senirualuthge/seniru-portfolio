@@ -1,15 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { openCommandPalette } from "@/hooks/useCommandPalette";
 import { cn } from "@/lib/utils";
 
 const LINKS = [
   { id: "home", label: "HOME" },
   { id: "about", label: "ABOUT" },
   { id: "build", label: "WHAT I BUILD" },
-  { id: "how-i-think", label: "HOW I THINK" },
   { id: "agreement-platform", label: "AGREEMENT PLATFORM" },
   { id: "aariya", label: "AARIYA" },
   { id: "lab", label: "SYSTEM LAB" },
@@ -18,6 +17,10 @@ const LINKS = [
   { id: "github", label: "GITHUB" },
   { id: "building", label: "CURRENTLY BUILDING" },
   { id: "build-log", label: "BUILD LOG" },
+  { id: "how-i-think", label: "HOW I THINK" },
+  { id: "problems-solutions", label: "PROBLEMS → SOLUTIONS" },
+  { id: "failures-lessons", label: "FAILURES → LESSONS" },
+  { id: "decisions", label: "DECISIONS" },
   { id: "system-status", label: "SYSTEM STATUS" },
   { id: "contact", label: "CONTACT" },
 ];
@@ -35,24 +38,18 @@ export default function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setMenuOpen(false);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  const isHome = pathname === "/";
 
-  const go = (id: string) => {
-    setMenuOpen(false);
-    if (pathname !== "/") {
-      // On a subpage, navigate home first, then scroll to the section
+  const handleClick = (id: string) => {
+    if (!isHome) {
       router.push(`/#${id}`);
-      return;
+    } else {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }
-    setTimeout(() => {
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    }, 150);
+    setMenuOpen(false);
   };
 
   return (
@@ -60,73 +57,42 @@ export default function Nav() {
       <header
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
-          scrolled ? "border-b border-line bg-ink/85 backdrop-blur-md" : "bg-transparent"
+          scrolled ? "bg-ink/80 backdrop-blur-sm border-b border-line" : "bg-transparent"
         )}
       >
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+          <Link href="/" className="font-mono text-sm tracking-[0.3em] text-primary" data-cursor="link">
+            SENIRU
+          </Link>
           <button
-            onClick={() => go("home")}
-            className="font-mono text-sm font-bold tracking-[0.3em] text-primary transition-colors hover:text-accent"
+            aria-label="Toggle menu"
+            className="font-mono text-[10px] tracking-[0.2em] text-secondary hover:text-primary transition-colors"
+            onClick={() => setMenuOpen((v) => !v)}
             data-cursor="link"
           >
-            SENIRU
+            {menuOpen ? "CLOSE" : "MENU"}
           </button>
-
-          <div className="flex items-center gap-3">
-            <button
-              onClick={openCommandPalette}
-              data-cursor="link"
-              className="hidden items-center gap-2 rounded border border-line px-3 py-1.5 font-mono text-[11px] text-secondary transition-colors hover:border-accent hover:text-primary sm:flex"
-            >
-              Search <kbd className="text-accent">⌘K</kbd>
-            </button>
-            <button
-              onClick={() => setMenuOpen((o) => !o)}
-              data-cursor="link"
-              aria-expanded={menuOpen}
-              className="flex items-center gap-2 rounded border border-line px-3 py-1.5 font-mono text-[11px] tracking-widest text-primary transition-colors hover:border-accent"
-            >
-              {menuOpen ? "CLOSE" : "MENU"}
-              <span className="flex flex-col gap-[3px]">
-                <span className="block h-px w-3 bg-current" />
-                <span className="block h-px w-3 bg-current" />
-              </span>
-            </button>
-          </div>
         </div>
       </header>
-
-      {/* Full-screen menu overlay */}
       <div
         className={cn(
-          "fixed inset-0 z-40 bg-ink/95 backdrop-blur-md transition-all duration-300",
-          menuOpen ? "opacity-100" : "pointer-events-none opacity-0"
+          "fixed inset-0 z-40 bg-ink/95 transition-transform duration-500 ease-out",
+          menuOpen ? "translate-y-0" : "-translate-y-full"
         )}
       >
-        <nav className="mx-auto flex h-full max-w-6xl flex-col justify-center px-5 pt-16">
-          <ul className="grid gap-1 sm:grid-cols-2">
-            {LINKS.map((link, i) => (
-              <li
-                key={link.id}
-                style={{
-                  transitionDelay: menuOpen ? `${i * 30}ms` : "0ms",
-                }}
-                className={cn(
-                  "transition-all duration-300",
-                  menuOpen ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-                )}
-              >
+        <nav className="mx-auto flex h-full max-w-7xl flex-col justify-center px-6">
+          <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
+            {LINKS.map((link) => (
+              <li key={link.id}>
                 <button
-                  onClick={() => go(link.id)}
+                  className="group flex w-full items-baseline justify-between border-b border-line pb-1 text-left"
+                  onClick={() => handleClick(link.id)}
                   data-cursor="link"
-                  className="group flex w-full items-center gap-4 border-b border-line/60 py-3 text-left transition-colors hover:border-accent"
                 >
-                  <span className="font-mono text-[10px] text-secondary/60">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="text-xl font-medium tracking-tight text-secondary transition-colors group-hover:text-primary sm:text-2xl">
+                  <span className="font-mono text-xs tracking-[0.25em] text-secondary transition-colors group-hover:text-primary">
                     {link.label}
                   </span>
+                  <span className="font-mono text-[10px] text-secondary/50 group-hover:text-accent">#{link.id}</span>
                 </button>
               </li>
             ))}

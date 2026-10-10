@@ -18,7 +18,10 @@ export default function AccessibilityPrefs() {
     const timer = setTimeout(() => {
       try {
         const raw = localStorage.getItem(STORAGE_KEY);
-        if (raw) {
+        const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+        if (!raw && mq.matches) {
+          setPrefs((prev) => ({ ...prev, reduceMotion: true }));
+        } else if (raw) {
           const loaded = JSON.parse(raw) as Partial<Prefs>;
           setPrefs((prev) => ({ ...prev, ...loaded }));
         }
