@@ -69,7 +69,7 @@ jobs:
           # Serves the site under /<repo-name>/ for project pages
           NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
           # Public Web3Forms key for the contact form (repo Variable, not a secret)
-          NEXT_PUBLIC_WEB3FORMS_KEY: ${{ vars.WEB3FORMS_KEY }}
+          NEXT_PUBLIC_WEB3FORMS_KEY: ${{ vars.NEXT_PUBLIC_WEB3FORMS_KEY }}
 
       - uses: actions/upload-pages-artifact@v3
         with:
